@@ -5,7 +5,7 @@
 2. run the command 'yarn start' in the terminal to start the app at port 3000.
 
 ### Demo - Deployed over Netlify 
-
+[Deployed link](https://weather-app-by-omkar.netlify.app/)
 
 ### APIs Used
 [Open Weather APIs](https://openweathermap.org/)
