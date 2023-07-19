@@ -11,16 +11,19 @@ const getForcastAction = asyncActionCreator(getForcastActionType);
 const getWeatherData = (city)=>{
     const axiosConfig = {
         url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=48f5ae62c8edd4eb24f90c633e17df79`,
-        method: "GET",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          requireCreds: true,
-        },
+        method: "GET"
       };
     return getWeatherDataAction.action(axiosConfig);
 };
 
+const getForcast = (lat,lon,cnt)=>{
+    const axiosConfig = {
+        url:`api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=48f5ae62c8edd4eb24f90c633e17df79`,
+        method: "GET"
+    }
+    return getForcastAction.action(axiosConfig);
+}
 
 
-export {getForcastActionType,getWeatherData,getWeatherDataActionType};
+
+export {getForcastActionType,getWeatherData,getWeatherDataActionType,getForcast};

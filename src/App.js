@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import styled from "styled-components";
 import Axios from "axios";
 import City from "./Components/City";
 import WeatherInfo from "./Components/WeatherInfo";
 import { AiOutlineClose } from "react-icons/ai";
-
+import {useDispatch,useSelector,shallowEqual} from 'react-redux';
+import { getWeatherData } from "./Redux/WeatherApp/WeatherAppAction";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,25 +38,32 @@ const CloseButton = styled.div`
 `;
 
 function App() {
+  const dispatch = useDispatch();
+  const { data ,isPending,isError} =
+  useSelector(({ weather }) => weather.weatherData, shallowEqual) ||
+  {};
+
+
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState();
   const fetchWeather = async (e) => {
     e.preventDefault();
-    const response = await Axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=48f5ae62c8edd4eb24f90c633e17df79`
-    );
-    setWeather(response.data);
+    dispatch(getWeatherData(city))
   };
+
+  useEffect(()=>{
+    setWeather(data)
+  },[data])
   return (
     <Container>
-      {city && weather ?<CloseButton onClick={()=>{
+      {city && weather && Object.keys(weather).length > 0 ? <CloseButton onClick={()=>{
         setCity("");
         setWeather()
       }}>
         <AiOutlineClose />
       </CloseButton>:null}
       <AppLabel>Weather App</AppLabel>
-      {city && weather ? (
+      {city && weather && Object.keys(weather).length > 0 ? (
         <WeatherInfo weather={weather} city={city} />
       ) : (
         <City setCity={setCity} fetchWeather={fetchWeather} />

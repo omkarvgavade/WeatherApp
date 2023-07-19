@@ -7,6 +7,7 @@ import perfectDay from '../assets/icons/perfect-day.svg';
 import rain from '../assets/icons/rain.svg';
 import rainNight from '../assets/icons/rain-night.svg';
 import storm from '../assets/icons/storm.svg';
+
 export const WeatherIcons = {
     "01d": sunny,
     "01n": night,
