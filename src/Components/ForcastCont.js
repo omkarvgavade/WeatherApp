@@ -5,10 +5,7 @@ import {
   WeatherContainer,
   WeatherIcon,
 } from "./WeatherInfo";
-import Switch from "react-switch";
-import { useState } from "react";
 import SwitchTemperature from "./SwitchTemperature";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const ForcastContStyled = styled.div`
   width: 100%;
@@ -28,7 +25,6 @@ const DateStyled = styled.p`
 `;
 
 function ForcastCont({ weather, index }) {
-  const [temperature, setTemperature] = useState(false);
 
   const getDate = (timeStamp) => {
     const dateObj = new Date(timeStamp);
@@ -38,10 +34,6 @@ function ForcastCont({ weather, index }) {
     const year = dateObj.getFullYear();
     const dayAndDate = `${dayShort}, ${monthShort} ${dateNumber}, ${year}`;
     return dayAndDate;
-  };
-
-  const toggleTemperatures = (e) => {
-    setTemperature((prev) => !prev);
   };
 
   return (
@@ -57,11 +49,6 @@ function ForcastCont({ weather, index }) {
           <SwitchTemperature maxTemp={weather?.maxTemp || 0} index={index}/>
         </Condition>
       </WeatherContainer>
-      <ReactTooltip
-        anchorId={`temp-switch-${index + 1}`}
-        place="bottom"
-        content={!temperature ? "Switch to Fahrenheit":"Switch to Celsius"}
-      />
     </ForcastContStyled>
   );
 }
