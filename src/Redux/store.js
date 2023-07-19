@@ -1,7 +1,9 @@
 import { combineReducers, createStore, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { weatherDataReducer } from "./WeatherApp/WeatherAppReducer";
 
 const rootReducer = combineReducers({
+    weather:weatherDataReducer
 });
 
 let composeEnhancers = compose;
