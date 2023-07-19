@@ -1,5 +1,6 @@
 # Weather App Using ReactJs
 
+<a href="https://gifyu.com/image/SWDFP"><img src="https://s11.gifyu.com/images/SWDFP.gif" alt="SWDFP.gif" border="0" /></a>
 ## How to run the project on local
 1. Clone the repository and use the 'yarn install' command in terminal
 2. run the command 'yarn start' in the terminal to start the app at port 3000.
