@@ -25,5 +25,6 @@ https://openweathermap.org/current
 * `redux`
 * `react-toastify`
 * `react-loader-spinner`
+* `react-switch`
 
 

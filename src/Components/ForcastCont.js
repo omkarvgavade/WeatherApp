@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import {
   Condition,
-  ToggleTempTexture,
   WeatherContainer,
   WeatherIcon,
 } from "./WeatherInfo";
 import Switch from "react-switch";
 import { useState } from "react";
+import SwitchTemperature from "./SwitchTemperature";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const ForcastContStyled = styled.div`
@@ -54,14 +54,7 @@ function ForcastCont({ weather, index }) {
         />
         <Condition>
           {`  ${weather.description}`}
-          <span>
-            {temperature
-              ? `${Math.floor((weather.maxTemp - 273) * 1.8 + 32)}°F `
-              : `${Math.floor(weather.maxTemp - 273)}°C`}
-            <ToggleTempTexture id={`temp-switch-${index + 1}`}>
-              <Switch onChange={toggleTemperatures} checked={temperature} />
-            </ToggleTempTexture>
-          </span>
+          <SwitchTemperature maxTemp={weather?.maxTemp || 0} index={index}/>
         </Condition>
       </WeatherContainer>
       <ReactTooltip

@@ -87,7 +87,7 @@ function Forcast() {
   }, [data]);
   return (
     <ForcastContainer>
-      <WeatherInfoLabel>Forcast (5 days)</WeatherInfoLabel>
+      <WeatherInfoLabel>Forecast (5 days)</WeatherInfoLabel>
       {isPending ? <ResultNotFound><Loader/></ResultNotFound>: forcastArray && forcastArray.length > 0 ? <div>
         {forcastArray.map((weather, index) => {
           return (

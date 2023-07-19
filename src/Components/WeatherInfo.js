@@ -8,7 +8,7 @@ import pressure from "../assets/icons/pressure.svg";
 import WeatherDetailsComponent from "./WeatherDetailsComponent";
 import { useState, useEffect } from "react";
 import { useSelector, shallowEqual } from "react-redux";
-import Switch from "react-switch";
+import SwitchTemperature from "./SwitchTemperature";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import Loader from "../Common/Loader";
 
@@ -128,14 +128,7 @@ export const WeatherInfo = () => {
           <Location>{`${weather?.name}, ${weather?.sys?.country}`}</Location>
           <WeatherContainer>
             <Condition>
-              <span>
-                {temperature
-                  ? `${Math.floor((weather?.main?.temp - 273) * 1.8 + 32)}°F `
-                  : `${Math.floor(weather?.main?.temp - 273)}°C`}
-                <ToggleTempTexture id="temp-switch">
-                  <Switch onChange={toggleTemperatures} checked={temperature} />
-                </ToggleTempTexture>
-              </span>
+            <SwitchTemperature  maxTemp={weather?.main?.temp || 0}/>
               {`  |  ${weather?.weather[0].description}`}
             </Condition>
             <WeatherIcon
@@ -150,12 +143,12 @@ export const WeatherInfo = () => {
             <span>
               {" "}
               <MaxMinTextStyled>Max-Temp :</MaxMinTextStyled>
-              {`${Math.floor(weather?.main?.temp_max - 273)}°C`}
+              <SwitchTemperature maxTemp={weather?.main?.temp_max || 0}/>
             </span>
             |
             <span>
               <MaxMinTextStyled>Min-Temp :</MaxMinTextStyled>
-              {`${Math.floor(weather?.main?.temp_min - 273)}°C`}
+              <SwitchTemperature maxTemp={weather?.main?.temp_min || 0}/>
             </span>
           </Condition>
           <WeatherInfoLabel>Weather Info</WeatherInfoLabel>
