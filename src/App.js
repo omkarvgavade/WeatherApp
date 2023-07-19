@@ -1,74 +1,85 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import Axios from "axios";
 import City from "./Components/City";
-import WeatherInfo from "./Components/WeatherInfo";
-import { AiOutlineClose } from "react-icons/ai";
-import {useDispatch,useSelector,shallowEqual} from 'react-redux';
+import { WeatherInfo } from "./Components/WeatherInfo";
+import { useDispatch } from "react-redux";
 import { getWeatherData } from "./Redux/WeatherApp/WeatherAppAction";
-const Container = styled.div`
+import { getForcast } from "./Redux/WeatherApp/WeatherAppAction";
+import Forcast from "./Components/Forcast";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { handleInputError } from "./Utils/HelperFunctions";
+
+
+const MainContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+`;
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 380px;
-  padding: 20px 10px;
-  background: linear-gradient(#bdc3c7, #2c3e50);
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(#000428,#004e92);
   margin: auto;
   border-radius: 4px;
   box-shadow: 0 3px 6px 0 #555;
-  font-family: Montserrat;
 `;
 
-const AppLabel = styled.h2`
-  color: black;
+const AppLabel = styled.h1`
   margin: 20px auto;
   font-weight: bold;
-`;
-const CloseButton = styled.div`
-    padding: 3px;
-    left: 45%;
-    background-color: black;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    position: relative;
-    cursor: pointer;
+  font-family:'Pacifico', cursive;
 `;
 
 function App() {
   const dispatch = useDispatch();
-  const { data ,isPending,isError} =
-  useSelector(({ weather }) => weather.weatherData, shallowEqual) ||
-  {};
-
-
   const [city, setCity] = useState("");
-  const [weather, setWeather] = useState();
-  const fetchWeather = async (e) => {
+  const [isReset, setIsReset] = useState(true);
+  const fetchWeather = (e) => {
     e.preventDefault();
-    dispatch(getWeatherData(city))
+    if (!city) {
+      handleInputError("Please enter a city name.");
+      return;
+    }
+    dispatch(getWeatherData(city));
+    dispatch(getForcast(city));
+    setIsReset(false);
   };
 
-  useEffect(()=>{
-    setWeather(data)
-  },[data])
   return (
-    <Container>
-      {city && weather && Object.keys(weather).length > 0 ? <CloseButton onClick={()=>{
-        setCity("");
-        setWeather()
-      }}>
-        <AiOutlineClose />
-      </CloseButton>:null}
-      <AppLabel>Weather App</AppLabel>
-      {city && weather && Object.keys(weather).length > 0 ? (
-        <WeatherInfo weather={weather} city={city} />
-      ) : (
-        <City setCity={setCity} fetchWeather={fetchWeather} />
-      )}
-    </Container>
+    <MainContainer>
+      <Container>
+        <AppLabel>Weather App</AppLabel>
+        <City
+          setCity={setCity}
+          city={city}
+          fetchWeather={fetchWeather}
+          setIsReset={setIsReset}
+        />
+        {!isReset ? (
+          <>
+            <WeatherInfo />
+            <Forcast />
+          </>
+        ) : null}
+      </Container>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </MainContainer>
   );
 }
 

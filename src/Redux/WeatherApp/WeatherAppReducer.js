@@ -35,18 +35,21 @@ export const weatherDataReducer = (state = initState, action) => {
       };
     case getForcastActionType.pending:
       return {
+        ...state,
         forcastData: {
           ...promiseState(true, false, false, {}),
         },
       };
     case getForcastActionType.fulfilled:
       return {
+        ...state,
         forcastData: {
           ...promiseState(false, true, false, action.payload),
         },
       };
     case getForcastActionType.rejected:
       return {
+        ...state,
         forcastData: {
           ...promiseState(false, false, true, {}),
         },

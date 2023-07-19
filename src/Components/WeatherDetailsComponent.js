@@ -2,8 +2,8 @@ import React from "react";
 import { WeatherInfoIcons } from "./WeatherInfo";
 import styled from "styled-components";
 
-const WeatherDetailsComponent = ({ name, value }) => {
-  const InfoContainer = styled.div`
+
+const InfoContainer = styled.div`
     display: flex;
     margin: 5px 10px;
     flex-direction: row;
@@ -11,19 +11,22 @@ const WeatherDetailsComponent = ({ name, value }) => {
     align-items: center;
   `;
   const InfoIcon = styled.img`
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
   `;
   const InfoLabel = styled.span`
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 18px;
     margin: 15px;
     & span {
-      font-size: 12px;
+      font-size: 16px;
       text-transform: capitalize;
     }
   `;
+
+
+const WeatherDetailsComponent = ({ name, value }) => {
   return (
     <InfoContainer>
       <InfoIcon src={WeatherInfoIcons[name]} />

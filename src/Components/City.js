@@ -16,10 +16,10 @@ const SearchBox = styled.form`
     font-weight: bold;
   }
   & button {
-    background-color: black;
+    background-color:green;
     font-size: 14px;
     padding: 0 10px;
-    color: white;
+    color: #fff;
     border: none;
     border-radius:5px;
     outline: none;
@@ -32,18 +32,23 @@ const ChooseCityLabel = styled.span`
   margin: 10px auto;
   font-size: 18px;
   font-weight: bold;
+  color:gray;
 `;
-const City = ({ setCity, fetchWeather } ) => {
-
+const City = ({ setCity,city, fetchWeather ,setIsReset} ) => {
   return (
     <>
       <ChooseCityLabel>Find Weather using city name</ChooseCityLabel>
-      <SearchBox onSubmit={fetchWeather}>
+      <SearchBox>
         <input
           onChange={(e) => setCity(e.target.value)}
           placeholder="enter city name"
+          value={city}
         />
-        <button type={"submit"}>Search</button>
+        <button onClick={fetchWeather}>Search</button>
+        <button onClick={()=>{
+            setCity("");
+            setIsReset(true);
+        }}>Reset</button>
       </SearchBox>
     </>
   );

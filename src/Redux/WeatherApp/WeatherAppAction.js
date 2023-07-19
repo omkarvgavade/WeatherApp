@@ -16,9 +16,9 @@ const getWeatherData = (city)=>{
     return getWeatherDataAction.action(axiosConfig);
 };
 
-const getForcast = (lat,lon,cnt)=>{
+const getForcast = (city)=>{
     const axiosConfig = {
-        url:`api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=48f5ae62c8edd4eb24f90c633e17df79`,
+        url:`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=48f5ae62c8edd4eb24f90c633e17df79`,
         method: "GET"
     }
     return getForcastAction.action(axiosConfig);

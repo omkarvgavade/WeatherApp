@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { handleApiError } from '../../Utils/HelperFunctions';
 export const asyncActionTypeCreator = actionName =>({
      pending:`${actionName}_PENDING`,
      fulfilled:`${actionName}_FULFILLED`,
@@ -28,7 +28,14 @@ export const asyncActionCreator =(actionType)=>{
             dispatch(fulfilled(response.data));
             if(successCallback)successCallback(response.data)
          }).catch((error)=>{
-            dispatch(rejected(error))
+            dispatch(rejected(error));
+            if(error.response){
+                if(error.response.data.cod === "404"){
+                    handleApiError(error.response.data.message)
+                }else{
+                    handleApiError(error.message)
+                }
+            }
             if(errorCallback)errorCallback(error)
          })
     });
