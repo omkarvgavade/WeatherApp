@@ -15,7 +15,8 @@ https://openweathermap.org/current
 
 ### API Info
 * Method: `GET`
-* URL: `https://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&appid={API_KEY}`
+* Weather URL: `https://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&appid={API_KEY}`
+* Forcast URL`https://api.openweathermap.org/data/2.5/forecast?q=${CITY_NAME}&appid={API_KEY}`
 
 ### Libraries/Packages used
 * `styled-components`
