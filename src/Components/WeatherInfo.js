@@ -33,6 +33,7 @@ export const Condition = styled.span`
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
   & span {
     font-size: 28px;
     display: flex;
@@ -128,7 +129,10 @@ export const WeatherInfo = () => {
           <Location>{`${weather?.name}, ${weather?.sys?.country}`}</Location>
           <WeatherContainer>
             <Condition>
-            <SwitchTemperature  maxTemp={weather?.main?.temp || 0} index={18}/>
+              <SwitchTemperature
+                maxTemp={weather?.main?.temp || 0}
+                index={18}
+              />
               {`  |  ${weather?.weather[0].description}`}
             </Condition>
             <WeatherIcon
@@ -143,12 +147,18 @@ export const WeatherInfo = () => {
             <span>
               {" "}
               <MaxMinTextStyled>Max-Temp :</MaxMinTextStyled>
-              <SwitchTemperature maxTemp={weather?.main?.temp_max || 0} index={16}/>
+              <SwitchTemperature
+                maxTemp={weather?.main?.temp_max || 0}
+                index={16}
+              />
             </span>
             |
             <span>
               <MaxMinTextStyled>Min-Temp :</MaxMinTextStyled>
-              <SwitchTemperature maxTemp={weather?.main?.temp_min || 0} index={17}/>
+              <SwitchTemperature
+                maxTemp={weather?.main?.temp_min || 0}
+                index={17}
+              />
             </span>
           </Condition>
           <WeatherInfoLabel>Weather Info</WeatherInfoLabel>
